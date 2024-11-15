@@ -1,0 +1,38 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}Add/Edit Movie{% endblock %}
+
+{% block content %}
+    <h2>
+        {% if movie %}
+            {{ movie.title }}
+        {% else %}
+            Add New Movie
+        {% endif %}
+    </h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" class="form-control" value="{% if movie %}{{ movie.title }}{% else %}''{% endif %}" required>
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre</label>
+            <input type="text" name="genre" id="genre" class="form-control" value="{% if movie %}{{ movie.genre }}{% else %}''{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="rating">Rating (out of 10)</label>
+            <input type="number" name="rating" id="rating" class="form-control" min="0" max="10" value="{% if movie %}{{ movie.rating }}{% else %}0{% endif %}">
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" name="watched" id="watched" class="form-check-input" {% if movie and movie.watched %}checked{% endif %}>
+            <label class="form-check-label" for="watched">Watched</label>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="form-control">{% if movie %}{{ movie.description }}{% else %}''{% endif %}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'movie_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

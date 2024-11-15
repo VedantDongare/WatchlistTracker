@@ -1,0 +1,21 @@
+<!-- movies/templates/movies/movie_detail.html -->
+{% extends 'movies/base.html' %}
+
+{% block title %}Movie Details{% endblock %}
+
+{% block content %}
+    <h2>{{ movie.title }}</h2>
+    <p><strong>Genre:</strong> {{ movie.genre }}</p>
+    <p><strong>Rating:</strong> {{ movie.rating }}/10</p>
+    <p><strong>Description:</strong> {{ movie.description }}</p>
+    <p><strong>Status:</strong> 
+        {% if movie.watched %}
+            Watched
+        {% else %}
+            Unwatched
+        {% endif %}
+    </p>
+    <a href="{% url 'movie_update' movie.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'movie_delete' movie.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'movie_list' %}" class="btn btn-secondary mt-2">Back to List</a>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}Random Movie{% endblock %}
+
+{% block content %}
+    <h2>Random Pick</h2>
+    {% if movie %}
+        <h3>{{ movie.title }}</h3>
+        <p><strong>Genre:</strong> {{ movie.genre }}</p>
+        <p><strong>Rating:</strong> {{ movie.rating }}/10</p>
+        <p><strong>Description:</strong> {{ movie.description }}</p>
+        <p><strong>Status:</strong> 
+            {% if movie.watched %}
+                Watched
+            {% else %}
+                Unwatched
+            {% endif %}
+        </p>
+        <a href="{% url 'movie_detail' movie.id %}" class="btn btn-primary">View Details</a>
+    {% else %}
+        <p class="text-center">No unwatched movies found.</p>
+    {% endif %}
+    <a href="{% url 'movie_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+{% endblock %}

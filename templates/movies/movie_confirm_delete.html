@@ -1,0 +1,13 @@
+<!-- movies/templates/movies/movie_confirm_delete.html -->
+
+{% extends 'movies/base.html' %}
+
+{% block content %}
+  <h2>Confirm Delete</h2>
+  <p>Are you sure you want to delete "{{ movie.title }}"?</p>
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'movie_list' %}">Cancel</a>
+  </form>
+{% endblock %}
